@@ -8,6 +8,7 @@ def enviar_hora(cliente_socket):
     mensagem = f"Sistema: A hora atual é {hora_atual}"
     try:
         cliente_socket.send(mensagem.encode())
+        # Registrar no log a hora enviada e o cliente que recebeu
         with open("log_hora.log", "a") as log_file:
             log_file.write(f"{datetime.now()}: Enviada hora para cliente {cliente_socket.getpeername()}\n")
     except socket.error as e:
@@ -28,6 +29,7 @@ try:
     while True:
         client_socket, addr = server_socket.accept()
         print(f"Conexão estabelecida com: {addr}")
+        # Criar e iniciar uma thread para enviar a hora ao cliente
         t1= threading.Thread(target=enviar_hora, args=(client_socket,))
         t1.start()
 

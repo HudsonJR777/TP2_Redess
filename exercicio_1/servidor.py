@@ -1,10 +1,12 @@
 import socket
 
+# Configuração do servidor
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 try:
-    server_socket.bind(('127.0.0.1', 5000))
+    server_socket.bind(('127.0.0.1', 5000)) # Liga o servidor ao endereço IP local e à porta 5000
 
+    # Inicia o servidor e aguarda conexões
     server_socket.listen(5)
     print("Servidor esperando conexões...")
 
