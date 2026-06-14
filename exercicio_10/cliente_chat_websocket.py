@@ -4,7 +4,7 @@ import websockets
 async def receber_mensagens(websocket):
     try:
         async for message in websocket:
-            print(f"/n{message}")
+            print(f"\n{message}")
     except websockets.exceptions.ConnectionClosed:
         print("Conexão fechada pelo servidor")
 
@@ -27,5 +27,7 @@ async def main():
             await asyncio.gather(receber_mensagens(websocket), enviar_mensagens(websocket, nome))
     except ConnectionRefusedError:
         print("Não foi possível conectar ao servidor. Verifique se o servidor está em execução.")
+    except websockets.exceptions.ConnectionClosed:
+        print("Conexão fechada pelo servidor.")
     
 asyncio.run(main())
